@@ -1,11 +1,23 @@
+import { useState, useEffect } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import RiddleCard from '../components/RiddleCard'
 import SEOHead from '../components/SEOHead'
 import Link from 'next/link'
-import { riddles, getDailyRiddle, categories } from '../data/riddles'
+import { riddles, categories } from '../data/riddles'
 
-export default function Home({ daily, recent, cats }) {
+export default function Home({ allRiddles, cats }) {
+  const [daily, setDaily] = useState(null)
+  const [recent, setRecent] = useState([])
+
+  useEffect(() => {
+    const day = Math.floor(Date.now() / 86400000)
+    const todaysRiddle = allRiddles[day % allRiddles.length]
+    const recentRiddles = allRiddles.filter(r => r.id !== todaysRiddle.id).slice(0, 6)
+    setDaily(todaysRiddle)
+    setRecent(recentRiddles)
+  }, [])
+
   return (
     <>
       <SEOHead canonical="/" />
@@ -27,7 +39,21 @@ export default function Home({ daily, recent, cats }) {
               </p>
             </div>
             <div className="fade-up fade-up--1">
-              <RiddleCard riddle={daily} featured={true} showLink={true} />
+              {daily ? (
+                <RiddleCard riddle={daily} featured={true} showLink={true} />
+              ) : (
+                <div style={{
+                  background: 'rgba(250,246,238,0.05)',
+                  border: '1px solid rgba(232,184,75,0.3)',
+                  borderRadius: '10px',
+                  padding: '3rem',
+                  textAlign: 'center',
+                  color: 'var(--cream-dim)',
+                  fontStyle: 'italic'
+                }}>
+                  Loading today's riddle...
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -81,7 +107,7 @@ export default function Home({ daily, recent, cats }) {
               {recent.map(r => <RiddleCard key={r.id} riddle={r} />)}
             </div>
             <div style={{ textAlign: 'center' }}>
-              <Link href="/riddles" className="btn btn--outline-gold">View all {riddles.length} riddles →</Link>
+              <Link href="/riddles" className="btn btn--outline-gold">View all {allRiddles.length} riddles →</Link>
             </div>
           </div>
         </section>
@@ -123,8 +149,11 @@ export default function Home({ daily, recent, cats }) {
 }
 
 export async function getStaticProps() {
-  const daily  = getDailyRiddle()
-  const recent = riddles.filter(r => r.id !== daily.id).slice(0, 6)
-  const cats   = categories.map(c => ({ ...c, count: riddles.filter(r => r.category === c.slug).length }))
-  return { props: { daily: JSON.parse(JSON.stringify(daily)), recent: JSON.parse(JSON.stringify(recent)), cats } }
+  const cats = categories.map(c => ({ ...c, count: riddles.filter(r => r.category === c.slug).length }))
+  return {
+    props: {
+      allRiddles: JSON.parse(JSON.stringify(riddles)),
+      cats,
+    }
+  }
 }
