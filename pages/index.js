@@ -18,6 +18,17 @@ export default function Home({ allRiddles, cats }) {
     setRecent(recentRiddles)
   }, [])
 
+  const catIcons = {
+    classic:  '⚔️',
+    nature:   '🌿',
+    science:  '🔬',
+    history:  '🏛️',
+    wordplay: '📜',
+    lateral:  '🌀',
+    abstract: '💭',
+    modern:   '⚡',
+  }
+
   return (
     <>
       <SEOHead canonical="/" />
@@ -49,7 +60,7 @@ export default function Home({ allRiddles, cats }) {
                   padding: '3rem',
                   textAlign: 'center',
                   color: 'var(--cream-dim)',
-                  fontStyle: 'italic'
+                  fontStyle: 'italic',
                 }}>
                   Loading today's riddle...
                 </div>
@@ -68,28 +79,45 @@ export default function Home({ allRiddles, cats }) {
           <div className="container">
             <div className="divider">✦</div>
             <h2 style={{ textAlign: 'center', marginBottom: '0.4rem' }}>Browse by Category</h2>
-            <p style={{ textAlign: 'center', color: 'var(--cream-dim)', fontStyle: 'italic', marginBottom: '1.75rem' }}>Every riddle has its kingdom</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(175px, 1fr))', gap: '1rem' }}>
-              {cats.map((cat, i) => (
+            <p style={{ textAlign: 'center', color: 'var(--cream-dim)', fontStyle: 'italic', marginBottom: '1.75rem' }}>
+              Every riddle has its kingdom
+            </p>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '1rem',
+            }}>
+              {cats.map(cat => (
                 <Link key={cat.slug} href={`/categories/${cat.slug}`} style={{ textDecoration: 'none' }}>
-                  <div style={{
-                    background: 'rgba(250,246,238,0.04)',
-                    border: '1px solid rgba(232,184,75,0.2)',
-                    borderRadius: '8px',
-                    padding: '1.25rem',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    height: '100%',
-                  }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,184,75,0.1)'; e.currentTarget.style.borderColor = 'rgba(232,184,75,0.5)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(250,246,238,0.04)'; e.currentTarget.style.borderColor = 'rgba(232,184,75,0.2)'; }}
+                  <div
+                    style={{
+                      background: 'rgba(250,246,238,0.04)',
+                      border: '1px solid rgba(232,184,75,0.2)',
+                      borderRadius: '8px',
+                      padding: '1.25rem',
+                      textAlign: 'center',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      height: '100%',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = 'rgba(232,184,75,0.1)'
+                      e.currentTarget.style.borderColor = 'rgba(232,184,75,0.5)'
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = 'rgba(250,246,238,0.04)'
+                      e.currentTarget.style.borderColor = 'rgba(232,184,75,0.2)'
+                    }}
                   >
-                    <div style={{ fontSize: '1.8rem', marginBottom: '0.6rem' }}>
-                      {['⚔️','📜','🌀','💭','⚡'][i]}
+                    <div style={{ fontSize: '1.6rem', marginBottom: '0.5rem' }}>
+                      {catIcons[cat.slug] || '♟'}
                     </div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--cream)', marginBottom: '0.3rem' }}>{cat.label}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>{cat.count} riddles</div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--cream)', marginBottom: '0.25rem' }}>
+                      {cat.label}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>
+                      {cat.count} riddles
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -102,12 +130,16 @@ export default function Home({ allRiddles, cats }) {
           <div className="container">
             <div className="divider">✦</div>
             <h2 style={{ textAlign: 'center', marginBottom: '0.4rem' }}>More Riddles to Solve</h2>
-            <p style={{ textAlign: 'center', color: 'var(--cream-dim)', fontStyle: 'italic', marginBottom: '1.75rem' }}>Think you can handle these?</p>
+            <p style={{ textAlign: 'center', color: 'var(--cream-dim)', fontStyle: 'italic', marginBottom: '1.75rem' }}>
+              Think you can handle these?
+            </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
               {recent.map(r => <RiddleCard key={r.id} riddle={r} />)}
             </div>
             <div style={{ textAlign: 'center' }}>
-              <Link href="/riddles" className="btn btn--outline-gold">View all {allRiddles.length} riddles →</Link>
+              <Link href="/riddles" className="btn btn--outline-gold">
+                View all {allRiddles.length} riddles →
+              </Link>
             </div>
           </div>
         </section>
@@ -134,8 +166,12 @@ export default function Home({ allRiddles, cats }) {
               ].map(item => (
                 <div key={item.title} style={{ textAlign: 'center', padding: '1rem' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{item.icon}</div>
-                  <h4 style={{ marginBottom: '0.5rem', fontFamily: 'var(--font-display)', color: 'var(--cream)' }}>{item.title}</h4>
-                  <p style={{ fontSize: '0.95rem', color: 'var(--cream-dim)', margin: 0, lineHeight: 1.6 }}>{item.body}</p>
+                  <h4 style={{ marginBottom: '0.5rem', fontFamily: 'var(--font-display)', color: 'var(--cream)' }}>
+                    {item.title}
+                  </h4>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--cream-dim)', margin: 0, lineHeight: 1.6 }}>
+                    {item.body}
+                  </p>
                 </div>
               ))}
             </div>
@@ -149,7 +185,10 @@ export default function Home({ allRiddles, cats }) {
 }
 
 export async function getStaticProps() {
-  const cats = categories.map(c => ({ ...c, count: riddles.filter(r => r.category === c.slug).length }))
+  const cats = categories.map(c => ({
+    ...c,
+    count: riddles.filter(r => r.category === c.slug).length,
+  }))
   return {
     props: {
       allRiddles: JSON.parse(JSON.stringify(riddles)),
