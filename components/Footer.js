@@ -20,14 +20,22 @@ export default function Footer() {
               <li><Link href="/" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Daily Riddle</Link></li>
               <li><Link href="/riddles" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>All Riddles</Link></li>
               <li><Link href="/categories" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Categories</Link></li>
+              <li><Link href="/submit" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Submit a Riddle</Link></li>
             </ul>
           </div>
           <div>
-            <h4 style={{ color: 'var(--gold)', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: '1rem' }}>More</h4>
+            <h4 style={{ color: 'var(--gold)', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: '1rem' }}>About</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><Link href="/about" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>About</Link></li>
-
+              <li><Link href="/contact" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style={{ color: 'var(--gold)', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: '1rem' }}>Legal</h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><Link href="/privacy" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Privacy Policy</Link></li>
+              <li><Link href="/cookies" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Cookie Policy</Link></li>
+              <li><Link href="/terms" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Terms of Service</Link></li>
             </ul>
           </div>
         </div>

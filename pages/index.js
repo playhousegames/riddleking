@@ -69,13 +69,8 @@ export default function Home({ allRiddles, cats }) {
           </div>
         </section>
 
-        {/* ─── Ad ─── */}
-        <div className="container">
-          <div className="ad-slot ad-slot--banner">Advertisement · 728×90 Leaderboard</div>
-        </div>
-
         {/* ─── Categories ─── */}
-        <section style={{ padding: '2rem 0 3rem' }}>
+        <section style={{ padding: '3rem 0' }}>
           <div className="container">
             <div className="divider">✦</div>
             <h2 style={{ textAlign: 'center', marginBottom: '0.4rem' }}>Browse by Category</h2>
@@ -126,7 +121,7 @@ export default function Home({ allRiddles, cats }) {
         </section>
 
         {/* ─── Recent Riddles ─── */}
-        <section className="bg-darker" style={{ padding: '2rem 0 4rem' }}>
+        <section className="bg-darker" style={{ padding: '3rem 0 4rem' }}>
           <div className="container">
             <div className="divider">✦</div>
             <h2 style={{ textAlign: 'center', marginBottom: '0.4rem' }}>More Riddles to Solve</h2>
@@ -143,14 +138,6 @@ export default function Home({ allRiddles, cats }) {
             </div>
           </div>
         </section>
-
-        {/* ─── Ad rectangles ─── */}
-        <div className="container" style={{ padding: '2rem 1.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-            <div className="ad-slot ad-slot--rect">Advertisement · 300×250</div>
-            <div className="ad-slot ad-slot--rect">Advertisement · 300×250</div>
-          </div>
-        </div>
 
         {/* ─── Why section ─── */}
         <section className="bg-accent" style={{ padding: '3rem 0 4rem' }}>

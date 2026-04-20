@@ -3,7 +3,7 @@ import { riddles, categories } from '../data/riddles'
 const SITE_URL = 'https://www.riddleking.co.uk'
 
 function generateSitemap() {
-  const staticPages = ['', '/riddles', '/categories', '/about', '/submit', '/privacy']
+  const staticPages = ['', '/riddles', '/categories', '/about', '/submit', '/contact', '/privacy', '/cookies', '/terms']
 
   const riddlePages = riddles.map(r => `/riddles/${r.slug}`)
   const categoryPages = categories.map(c => `/categories/${c.slug}`)
