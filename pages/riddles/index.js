@@ -3,7 +3,6 @@ import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import RiddleCard from '../../components/RiddleCard'
 import SEOHead from '../../components/SEOHead'
-import Link from 'next/link'
 import { riddles, categories } from '../../data/riddles'
 
 export default function AllRiddles({ allRiddles, cats }) {
@@ -58,11 +57,7 @@ export default function AllRiddles({ allRiddles, cats }) {
           </div>
         </div>
 
-        <div className="container">
-          <div className="ad-slot ad-slot--banner">Advertisement · 728×90</div>
-        </div>
-
-        <div className="container" style={{ padding: '0 1.5rem 5rem' }}>
+        <div className="container" style={{ padding: '2rem 1.5rem 5rem' }}>
           <div style={{ marginBottom: '1.25rem', color: 'rgba(250,246,238,0.3)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '0.05em' }}>
             {filtered.length} riddle{filtered.length !== 1 ? 's' : ''} found
           </div>
@@ -73,14 +68,7 @@ export default function AllRiddles({ allRiddles, cats }) {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {filtered.map((r, i) => (
-                <div key={r.id}>
-                  <RiddleCard riddle={r} />
-                  {(i + 1) % 8 === 0 && i < filtered.length - 1 && (
-                    <div className="ad-slot ad-slot--inline" style={{ marginTop: '1.25rem' }}>Advertisement · In-feed</div>
-                  )}
-                </div>
-              ))}
+              {filtered.map(r => <RiddleCard key={r.id} riddle={r} />)}
             </div>
           )}
         </div>
