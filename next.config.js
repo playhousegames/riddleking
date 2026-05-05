@@ -4,6 +4,14 @@ const nextConfig = {
   images: { unoptimized: true },
   async redirects() {
     return [
+      // Non-www → www canonical redirect
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'riddleking.co.uk' }],
+        destination: 'https://www.riddleking.co.uk/:path*',
+        permanent: true,
+      },
+
       // Old WordPress difficulty routes → new category routes
       { source: '/difficulty/easy', destination: '/categories/classic', permanent: true },
       { source: '/difficulty/medium', destination: '/categories/classic', permanent: true },
