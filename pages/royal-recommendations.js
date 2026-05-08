@@ -86,7 +86,7 @@ const products = [
 ]
 
 export default function RoyalRecommendations() {
-  const { buildLink, isUS, loading } = useAmazonLink()
+  const { buildLink, isUS } = useAmazonLink()
 
   return (
     <>
@@ -140,7 +140,7 @@ export default function RoyalRecommendations() {
                 <ProductCard
                   key={product.ukAsin}
                   product={product}
-                  link={loading ? null : buildLink(product)}
+                  link={buildLink(product)}
                   isUS={isUS}
                   delay={i % 3}
                 />
@@ -269,21 +269,15 @@ function ProductCard({ product, link, isUS, delay }) {
         </div>
 
         {/* CTA */}
-        {link ? (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="btn btn--primary"
-            style={{ textAlign: 'center', textDecoration: 'none' }}
-          >
-            View on Amazon {isUS ? '🇺🇸' : '🇬🇧'}
-          </a>
-        ) : (
-          <div className="btn btn--primary" style={{ textAlign: 'center', opacity: 0.6 }}>
-            Loading…
-          </div>
-        )}
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="btn btn--primary"
+          style={{ textAlign: 'center', textDecoration: 'none' }}
+        >
+          View on Amazon {isUS ? '🇺🇸' : '🇬🇧'}
+        </a>
       </div>
     </div>
   )
