@@ -17,6 +17,7 @@ export default function Nav() {
           <li><Link href="/riddles">All Riddles</Link></li>
           <li><Link href="/categories">Categories</Link></li>
           <li><Link href="/about">About</Link></li>
+          <li><Link href="/royal-recommendations">Royal Picks</Link></li>
         </ul>
       </div>
     </nav>
