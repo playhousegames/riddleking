@@ -5,7 +5,7 @@ import { useAmazonLink } from '../lib/useAmazonLink'
 
 const products = [
   {
-    ukAsin: 'B014Q1XX9S',
+    ukAsin: 'B0FJMQB63N',
     usAsin: 'B014Q1XX9S',
     name: 'Codenames',
     emoji: '🕵️',
