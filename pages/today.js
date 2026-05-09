@@ -10,9 +10,8 @@ export default function Today() {
   const [dateLabel, setDateLabel] = useState('');
 
   useEffect(() => {
-    // Same deterministic daily logic as the homepage
-    const index = Math.floor(Date.now() / 86400000) % riddles.length;
-    const todays = riddles[index];
+    const featured = riddles.find(r => r.featured);
+    const todays = featured ?? riddles[Math.floor(Date.now() / 86400000) % riddles.length];
     setRiddle(todays);
 
     const sameCategory = riddles
