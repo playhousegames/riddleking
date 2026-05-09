@@ -50,6 +50,10 @@ p:last-child { margin-bottom: 0; }
 a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
 a:hover { color: #f0c55a; }
 
+button:hover .play-overlay {
+  opacity: 1;
+}
+
 /* ─── Layout ─── */
 .container {
   max-width: 1100px;
