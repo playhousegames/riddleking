@@ -28,22 +28,35 @@ const nextConfig = {
       { source: '/word-ladder-challenge/', destination: '/', permanent: true },
 
       // Old WordPress HTML pages
-      { source: '/tough-riddles.html', destination: '/riddles', permanent: true },
-      { source: '/easy-riddles.html', destination: '/riddles', permanent: true },
-      { source: '/funny-riddles.html', destination: '/riddles', permanent: true },
-      { source: '/riddle-categories', destination: '/categories', permanent: true },
-      { source: '/riddle-categories/', destination: '/categories', permanent: true },
+      { source: '/tough-riddles.html', destination: '/riddles/', permanent: true },
+      { source: '/easy-riddles.html', destination: '/riddles/', permanent: true },
+      { source: '/funny-riddles.html', destination: '/riddles/', permanent: true },
+      { source: '/riddle-categories', destination: '/categories/', permanent: true },
+      { source: '/riddle-categories/', destination: '/categories/', permanent: true },
 
       // Old WordPress .html variants
-      { source: '/:slug.html', destination: '/riddles/:slug', permanent: true },
+      { source: '/:slug.html', destination: '/riddles/:slug/', permanent: true },
 
       // Old WordPress taxonomy/category pages
-      { source: '/riddle-category/:slug', destination: '/categories', permanent: true },
-      { source: '/riddle-category/:slug/', destination: '/categories', permanent: true },
+      { source: '/riddle-category/:slug', destination: '/categories/', permanent: true },
+      { source: '/riddle-category/:slug/', destination: '/categories/', permanent: true },
+
+      // Old WordPress tag pages
+      { source: '/tag/:slug', destination: '/categories/', permanent: true },
+      { source: '/tag/:slug/', destination: '/categories/', permanent: true },
 
       // Old WordPress author pages
       { source: '/author/:slug', destination: '/', permanent: true },
       { source: '/author/:slug/', destination: '/', permanent: true },
+
+      // Old WordPress RSS feeds
+      { source: '/feed', destination: '/', permanent: true },
+      { source: '/feed/', destination: '/', permanent: true },
+      { source: '/feed/:path*', destination: '/', permanent: true },
+      { source: '/comments/feed', destination: '/', permanent: true },
+      { source: '/comments/feed/', destination: '/', permanent: true },
+      { source: '/:path*/feed', destination: '/', permanent: true },
+      { source: '/:path*/feed/', destination: '/', permanent: true },
 
       // Old WordPress pagination
       { source: '/riddles/page/:num', destination: '/riddles', permanent: true },

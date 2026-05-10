@@ -1,26 +1,16 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { riddles } from '../../data/riddles';
 
-export async function getStaticPaths() {
+export async function getServerSideProps({ params }) {
+  const riddle = riddles.find(r => r.slug === params.slug);
+  if (!riddle) return { notFound: true };
   return {
-    paths: riddles.map(r => ({ params: { slug: r.slug } })),
-    fallback: false,
+    redirect: {
+      destination: `/riddles/${riddle.slug}/`,
+      permanent: true,
+    },
   };
 }
 
-export async function getStaticProps({ params }) {
-  const riddle = riddles.find(r => r.slug === params.slug);
-  if (!riddle) return { notFound: true };
-  return { props: { targetSlug: riddle.slug } };
-}
-
-export default function ShortLink({ targetSlug }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace(`/riddles/${targetSlug}/`);
-  }, [targetSlug]);
-
+export default function ShortLink() {
   return null;
 }
