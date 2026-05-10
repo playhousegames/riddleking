@@ -30,6 +30,7 @@ export default function Nav() {
           <li><Link href="/categories" onClick={close}>Categories</Link></li>
           <li><Link href="/about" onClick={close}>About</Link></li>
           <li><Link href="/royal-recommendations" onClick={close}>Royal Picks</Link></li>
+          <li><Link href="/riddles/videos" onClick={close}>Videos</Link></li>
         </ul>
       </div>
     </nav>

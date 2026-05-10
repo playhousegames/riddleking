@@ -3,28 +3,34 @@ import { useState } from 'react';
 
 const videos = [
   {
-    id: 'YOUTUBE_ID_1',
-    title: 'What has hands but cannot clap?',
-    answer: 'A Clock',
+    id: 'j9DkmQn92hw',
+    title: 'The King has a riddle: Darkness',
+    description: 'Can you solve the Riddle King\'s riddle before the answer is revealed?',
     part: 1,
   },
   {
-    id: 'YOUTUBE_ID_2',
-    title: 'What has hands but cannot clap? — Answer',
-    answer: 'A Clock',
+    id: 'eROtfcZckaw',
+    title: 'The King reveals the answer: Darkness',
+    description: 'The Riddle King reveals the answer to the Darkness riddle. Did you get it right?',
     part: 2,
   },
   {
-    id: 'YOUTUBE_ID_3',
-    title: 'What breaks the moment you say it?',
-    answer: 'Silence',
+    id: 'eUagEivOoLg',
+    title: 'The King has a riddle: Catch me',
+    description: 'Can you solve the Riddle King\'s riddle before the answer is revealed?',
     part: 1,
   },
   {
-    id: 'YOUTUBE_ID_4',
-    title: 'What breaks the moment you say it? — Answer',
-    answer: 'Silence',
+    id: 'plVHmxtagm4',
+    title: 'The King reveals the answer: Catch me',
+    description: 'The Riddle King reveals the answer to the Catch me riddle. Did you get it right?',
     part: 2,
+  },
+  {
+    id: 'auOpeuIa2fE',
+    title: 'The King has a riddle for you',
+    description: 'The Riddle King has a brand new riddle. Can you solve it?',
+    part: 1,
   },
 ];
 
@@ -32,15 +38,16 @@ const schemaData = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'The King\'s Riddles — Video Series',
-  description: 'Watch the Riddle King deliver riddles and reveal answers in our TikTok and YouTube video series.',
+  description: 'Watch the Riddle King deliver riddles and reveal answers in our YouTube Shorts series.',
   itemListElement: videos.map((v, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
       '@type': 'VideoObject',
       name: v.title,
-      description: `Can you solve the riddle? ${v.title}`,
-      thumbnailUrl: `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`,
+      description: v.description,
+      thumbnailUrl: `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`,
+      contentUrl: `https://www.youtube.com/shorts/${v.id}`,
       embedUrl: `https://www.youtube.com/embed/${v.id}`,
       uploadDate: '2026-05-01',
       publisher: {
@@ -58,10 +65,10 @@ export default function VideosPage() {
   return (
     <>
       <Head>
-        <title>The King's Riddles — Video Series | Riddle King</title>
+        <title>The King&apos;s Riddles — Video Series | Riddle King</title>
         <meta
           name="description"
-          content="Watch the Riddle King deliver riddles and reveal answers. Can you solve them before the king does?"
+          content="Watch the Riddle King deliver riddles and reveal answers in our YouTube Shorts series. Can you solve them before the king does?"
         />
         <script
           type="application/ld+json"
@@ -88,7 +95,7 @@ export default function VideosPage() {
             >
               <div style={styles.thumbWrap}>
                 <img
-                  src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                  src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
                   alt={video.title}
                   style={styles.thumb}
                   loading="lazy"
@@ -174,8 +181,9 @@ const styles = {
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 240px))',
     gap: '1.5rem',
+    justifyContent: 'center',
   },
   card: {
     background: '#fff',
@@ -190,7 +198,7 @@ const styles = {
   },
   thumbWrap: {
     position: 'relative',
-    paddingTop: '56.25%',
+    paddingTop: '177.78%', // 9:16 portrait for Shorts
     background: '#2a1a5e',
     overflow: 'hidden',
   },
@@ -263,7 +271,7 @@ const styles = {
     background: '#1a0e3a',
     borderRadius: '12px',
     width: '100%',
-    maxWidth: '760px',
+    maxWidth: '380px', // narrow for portrait Shorts
     padding: '1rem',
     position: 'relative',
   },
@@ -287,7 +295,7 @@ const styles = {
   },
   embedWrap: {
     position: 'relative',
-    paddingTop: '56.25%',
+    paddingTop: '177.78%', // 9:16 portrait for Shorts
     borderRadius: '8px',
     overflow: 'hidden',
     background: '#000',
