@@ -1,36 +1,38 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import Nav from '../../components/Nav';
+import Footer from '../../components/Footer';
 
 const videos = [
   {
     id: 'j9DkmQn92hw',
-    title: 'The King has a riddle: Darkness',
+    title: 'The King has a riddle for you... 👑',
     description: 'Can you solve the Riddle King\'s riddle before the answer is revealed?',
     part: 1,
   },
   {
     id: 'eROtfcZckaw',
-    title: 'The King reveals the answer: Darkness',
-    description: 'The Riddle King reveals the answer to the Darkness riddle. Did you get it right?',
+    title: 'The King reveals all... 👑',
+    description: 'The Riddle King reveals the answer. Did you get it right?',
     part: 2,
   },
   {
     id: 'eUagEivOoLg',
-    title: 'The King has a riddle: Catch me',
+    title: 'The King has a riddle for you... 👑',
     description: 'Can you solve the Riddle King\'s riddle before the answer is revealed?',
     part: 1,
   },
   {
     id: 'plVHmxtagm4',
-    title: 'The King reveals the answer: Catch me',
-    description: 'The Riddle King reveals the answer to the Catch me riddle. Did you get it right?',
-    part: 2,
+    title: 'The King has a riddle for you... 👑',
+    description: 'Can you solve the Riddle King\'s riddle before the answer is revealed?',
+    part: 1,
   },
   {
     id: 'auOpeuIa2fE',
-    title: 'The King has a riddle for you',
-    description: 'The Riddle King has a brand new riddle. Can you solve it?',
-    part: 1,
+    title: 'The King reveals all... 👑',
+    description: 'The Riddle King reveals the answer. Did you get it right?',
+    part: 2,
   },
 ];
 
@@ -76,6 +78,7 @@ export default function VideosPage() {
         />
       </Head>
 
+      <Nav />
       <main style={styles.page}>
         <header style={styles.header}>
           <p style={styles.eyebrow}>Hear ye! Hear ye!</p>
@@ -138,6 +141,7 @@ export default function VideosPage() {
           </div>
         )}
       </main>
+      <Footer />
     </>
   );
 }
