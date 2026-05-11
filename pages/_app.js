@@ -61,6 +61,9 @@ export default function App({ Component, pageProps }) {
         `}
       </Script>
 
+      <Script src="https://geniuslinkcdn.com/snippet.min.js" strategy="afterInteractive" onLoad={() => { // @ts-ignore
+        window.Genius?.amazon?.convertLinks(426973, true, "https://buy.geni.us"); }} />
+
       <Component {...pageProps} />
       <CookieConsent />
     </>
