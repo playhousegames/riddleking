@@ -4,6 +4,9 @@ export default function SEOHead({ title, description, riddle, canonical }) {
   const siteName = 'Riddle King'
   const siteUrl = 'https://www.riddleking.co.uk'
   const ogImage = `${siteUrl}/logo-icon.png`
+  const canonicalUrl = canonical
+    ? `${siteUrl}${canonical.endsWith('/') ? canonical : canonical + '/'}`
+    : null
   const fullTitle = title ? `${title} | ${siteName}` : `${siteName} — Daily Riddles & Brain Teasers`
   const metaDesc = description || 'Sharpen your mind with handpicked riddles. New daily riddle every day. Classic, wordplay, lateral thinking and more — all free at Riddle King.'
 
@@ -45,7 +48,7 @@ export default function SEOHead({ title, description, riddle, canonical }) {
       <title>{fullTitle}</title>
       <meta name="description" content={metaDesc} />
       <meta name="robots" content="index, follow" />
-      {canonical && <link rel="canonical" href={`${siteUrl}${canonical}`} />}
+      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
@@ -55,7 +58,7 @@ export default function SEOHead({ title, description, riddle, canonical }) {
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="512" />
       <meta property="og:image:height" content="512" />
-      {canonical && <meta property="og:url" content={`${siteUrl}${canonical}`} />}
+      {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary" />
