@@ -93,10 +93,6 @@ const nextConfig = {
       { source: '/riddles/the-age-puzzle', destination: '/riddles', permanent: true },
       { source: '/riddles/the-age-puzzle/', destination: '/riddles', permanent: true },
 
-      // Catch-all for any remaining old WordPress riddle slugs starting with "the-"
-      { source: '/riddles/the-:slug', destination: '/riddles', permanent: true },
-      { source: '/riddles/the-:slug/', destination: '/riddles', permanent: true },
-
       // Suspended page from when domain lapsed
       { source: '/cgi-sys/suspendedpage.cgi', destination: '/', permanent: true },
     ]
