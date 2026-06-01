@@ -1,17 +1,22 @@
 import { useState } from 'react'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
-import RiddleCard from '../../components/RiddleCard'
 import SEOHead from '../../components/SEOHead'
 import Link from 'next/link'
-import { riddles, getRiddleBySlug, getRelatedRiddles } from '../../data/riddles'
+import { riddles, categories, getRiddleBySlug, getSameCategoryRiddles } from '../../data/riddles'
 
-export default function RiddlePage({ riddle, related }) {
+const DIFFICULTY_ARTICLE = { easy: 'an easy', medium: 'a medium', hard: 'a hard' }
+
+export default function RiddlePage({ riddle, sameCategory }) {
   const [revealed, setRevealed] = useState(false)
   if (!riddle) return null
 
   const diffLabel = riddle.difficulty.charAt(0).toUpperCase() + riddle.difficulty.slice(1)
   const catLabel  = riddle.category.charAt(0).toUpperCase() + riddle.category.slice(1)
+  const category  = categories.find(c => c.slug === riddle.category)
+  const contextLine = category
+    ? `This is ${DIFFICULTY_ARTICLE[riddle.difficulty] || 'a'} riddle in the ${category.label} category — ${category.description}.`
+    : null
   const hasLongform = riddle.longform && (
     riddle.longform.why_it_works ||
     riddle.longform.origins ||
@@ -36,7 +41,7 @@ export default function RiddlePage({ riddle, related }) {
             <nav style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.05em', color: 'rgba(250,246,238,0.35)' }}>
               <Link href="/" style={{ color: 'rgba(250,246,238,0.35)' }}>Home</Link>
               <span style={{ margin: '0 8px' }}>›</span>
-              <Link href="/riddles" style={{ color: 'rgba(250,246,238,0.35)' }}>Riddles</Link>
+              <Link href={`/categories/${riddle.category}`} style={{ color: 'rgba(250,246,238,0.35)' }}>{catLabel}</Link>
               <span style={{ margin: '0 8px' }}>›</span>
               <span style={{ color: 'var(--gold)' }}>{riddle.answer}</span>
             </nav>
@@ -93,17 +98,23 @@ export default function RiddlePage({ riddle, related }) {
               </div>
             </div>
 
-            {/* Crawler-visible answer */}
-            <details style={{ marginBottom: '1.5rem' }}>
-              <summary style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.05em', cursor: 'pointer', color: 'rgba(250,246,238,0.3)', textTransform: 'uppercase', listStyle: 'none', outline: 'none' }}>
-                ▸ Quick answer (for search engines & AI)
-              </summary>
-              <div style={{ marginTop: '0.75rem', padding: '1rem', background: 'rgba(250,246,238,0.05)', border: 'var(--border-cream)', borderRadius: '4px' }}>
-                <p style={{ margin: 0, fontSize: '1rem', color: 'var(--cream-dim)' }}>
-                  <strong style={{ color: 'var(--gold)' }}>Answer:</strong> {riddle.answer}. {riddle.explanation}
-                </p>
-              </div>
-            </details>
+            {/* Always-visible answer + explanation (SSR, no click required) */}
+            <section aria-label="Answer and explanation" style={{ marginBottom: '1.5rem', padding: '1.25rem 1.5rem', background: 'rgba(250,246,238,0.05)', border: 'var(--border-cream)', borderRadius: '6px' }}>
+              <div className="eyebrow" style={{ marginBottom: '0.4rem' }}>Answer</div>
+              <p style={{ margin: '0 0 0.75rem', fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--gold)' }}>
+                {riddle.answer}
+              </p>
+              <div className="eyebrow" style={{ marginBottom: '0.4rem' }}>Explanation</div>
+              <p style={{ margin: 0, fontSize: '1rem', color: 'var(--cream-dim)', lineHeight: 1.7 }}>
+                {riddle.explanation}
+              </p>
+            </section>
+
+            {contextLine && (
+              <p style={{ marginBottom: '1.5rem', fontSize: '0.9rem', color: 'rgba(250,246,238,0.5)', fontStyle: 'italic' }}>
+                {contextLine}
+              </p>
+            )}
 
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <Link href="/riddles" className="btn btn--ghost" style={{ fontSize: '0.9rem', padding: '0.5rem 1.2rem' }}>← All Riddles</Link>
@@ -112,29 +123,27 @@ export default function RiddlePage({ riddle, related }) {
           </div>
         </section>
 
-        {/* ─── Longform content (collapsible, SEO-safe) ─── */}
+        {/* ─── Longform content (always visible, SEO-prominent) ─── */}
         {hasLongform && (
           <section style={{ padding: '2rem 0 3rem' }}>
             <div className="container--narrow">
-              <details style={{
+              <div style={{
                 background: 'rgba(250,246,238,0.03)',
                 border: '1px solid rgba(232,184,75,0.2)',
                 borderRadius: '10px',
                 overflow: 'hidden',
               }}>
-                <summary style={{
+                <div style={{
                   padding: '1.25rem 1.75rem',
-                  cursor: 'pointer',
-                  listStyle: 'none',
-                  outline: 'none',
+                  borderBottom: '1px solid rgba(232,184,75,0.15)',
                 }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.3rem' }}>
-                    ✦ Go deeper ▼
+                    ✦ Go deeper
                   </div>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', color: 'var(--cream)' }}>
                     The full story behind this riddle
                   </div>
-                </summary>
+                </div>
 
                 <div style={{ padding: '0.5rem 1.75rem 2rem' }}>
 
@@ -190,7 +199,7 @@ export default function RiddlePage({ riddle, related }) {
                   )}
 
                 </div>
-              </details>
+              </div>
             </div>
           </section>
         )}
@@ -205,14 +214,31 @@ export default function RiddlePage({ riddle, related }) {
           </div>
         </div>
 
-        {/* ─── Related riddles ─── */}
-        {related.length > 0 && (
+        {/* ─── More riddles in the same category (link list, internal linking) ─── */}
+        {sameCategory.length > 0 && (
           <section className="bg-darker" style={{ padding: '2rem 0 4rem' }}>
             <div className="container--narrow">
               <div className="divider">✦</div>
-              <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>More to Ponder</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {related.map(r => <RiddleCard key={r.id} riddle={r} />)}
+              <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>More {catLabel} Riddles</h2>
+              <p style={{ textAlign: 'center', color: 'rgba(250,246,238,0.5)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                Keep going — other riddles in this category:
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {sameCategory.map(r => (
+                  <li key={r.id} style={{ borderLeft: '2px solid rgba(232,184,75,0.4)', paddingLeft: '1rem' }}>
+                    <Link
+                      href={`/riddles/${r.slug}`}
+                      style={{ color: 'var(--cream)', textDecoration: 'none', fontStyle: 'italic', fontSize: '1rem', lineHeight: 1.5 }}
+                    >
+                      {r.question}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+                <Link href={`/categories/${riddle.category}`} className="btn btn--ghost" style={{ fontSize: '0.9rem', padding: '0.5rem 1.2rem' }}>
+                  View all {catLabel} riddles →
+                </Link>
               </div>
             </div>
           </section>
@@ -231,6 +257,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const riddle = getRiddleBySlug(params.slug)
   if (!riddle) return { notFound: true }
-  const related = getRelatedRiddles(riddle, 3)
-  return { props: { riddle: JSON.parse(JSON.stringify(riddle)), related: JSON.parse(JSON.stringify(related)) } }
+  const sameCategory = getSameCategoryRiddles(riddle, 6)
+  return { props: { riddle: JSON.parse(JSON.stringify(riddle)), sameCategory: JSON.parse(JSON.stringify(sameCategory)) } }
 }

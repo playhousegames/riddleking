@@ -562,3 +562,10 @@ export function getRelatedRiddles(riddle, count = 3) {
     .filter(r => r.id !== riddle.id && (r.category === riddle.category || r.difficulty === riddle.difficulty))
     .slice(0, count);
 }
+
+export function getSameCategoryRiddles(riddle, count = 6) {
+  const sameCat = riddles.filter(r => r.id !== riddle.id && r.category === riddle.category);
+  if (sameCat.length >= count) return sameCat.slice(0, count);
+  const filler = riddles.filter(r => r.id !== riddle.id && r.category !== riddle.category);
+  return [...sameCat, ...filler].slice(0, count);
+}
