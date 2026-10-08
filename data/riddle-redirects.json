@@ -1,0 +1,152 @@
+[
+  {
+    "source": "/riddles/cities-no-houses-mountains-no-trees",
+    "destination": "/riddles/cities-but-no-houses/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/cities-no-houses-mountains-no-trees/",
+    "destination": "/riddles/cities-but-no-houses/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/travels-world-without-moving",
+    "destination": "/riddles/travels-world-stays-in-corner/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/travels-world-without-moving/",
+    "destination": "/riddles/travels-world-stays-in-corner/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/answers-questions-you-ask-yourself",
+    "destination": "/riddles/echo-speaks-without-mouth/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/answers-questions-you-ask-yourself/",
+    "destination": "/riddles/echo-speaks-without-mouth/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/voice-of-an-empty-place",
+    "destination": "/riddles/echo-speaks-without-mouth/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/voice-of-an-empty-place/",
+    "destination": "/riddles/echo-speaks-without-mouth/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/left-is-right-right-is-left",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/left-is-right-right-is-left/",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/never-shows-you-what-others-see",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/never-shows-you-what-others-see/",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/used-twice-a-day-forgotten-immediately",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/used-twice-a-day-forgotten-immediately/",
+    "destination": "/riddles/never-lies-always-reversed/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/what-keeps-the-moon-from-flying-away",
+    "destination": "/riddles/invisible-force-holds-everything-down/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/what-keeps-the-moon-from-flying-away/",
+    "destination": "/riddles/invisible-force-holds-everything-down/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/window-to-the-past",
+    "destination": "/riddles/catches-light-from-a-billion-years-ago/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/window-to-the-past/",
+    "destination": "/riddles/catches-light-from-a-billion-years-ago/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/copies-everything-understands-nothing",
+    "destination": "/riddles/follow-by-day-vanish-at-night/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/copies-everything-understands-nothing/",
+    "destination": "/riddles/follow-by-day-vanish-at-night/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/invisible-social-contract",
+    "destination": "/riddles/british-national-sport/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/invisible-social-contract/",
+    "destination": "/riddles/british-national-sport/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/medicine-that-is-completely-free",
+    "destination": "/riddles/contagious-not-illness-best-medicine/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/medicine-that-is-completely-free/",
+    "destination": "/riddles/contagious-not-illness-best-medicine/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/invisible-web-in-every-room",
+    "destination": "/riddles/invisible-carries-voices-films-music/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/invisible-web-in-every-room/",
+    "destination": "/riddles/invisible-carries-voices-films-music/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/guided-explorers-for-centuries",
+    "destination": "/riddles/always-points-north-no-opinion/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/guided-explorers-for-centuries/",
+    "destination": "/riddles/always-points-north-no-opinion/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/grape-transformed-by-time",
+    "destination": "/riddles/better-with-age-ruined-by-heat/",
+    "permanent": true
+  },
+  {
+    "source": "/riddles/grape-transformed-by-time/",
+    "destination": "/riddles/better-with-age-ruined-by-heat/",
+    "permanent": true
+  }
+]

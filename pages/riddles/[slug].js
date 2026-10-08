@@ -3,7 +3,7 @@ import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import SEOHead from '../../components/SEOHead'
 import Link from 'next/link'
-import { riddles, categories, getRiddleBySlug, getSameCategoryRiddles } from '../../data/riddles'
+import { riddles, categories, getRiddleBySlug, getSameCategoryRiddles, getRiddleMetaDescription, getRiddleTitle } from '../../data/riddles'
 
 const DIFFICULTY_ARTICLE = { easy: 'an easy', medium: 'a medium', hard: 'a hard' }
 
@@ -27,8 +27,8 @@ export default function RiddlePage({ riddle, sameCategory }) {
   return (
     <>
       <SEOHead
-        title={riddle.question.slice(0, 60) + (riddle.question.length > 60 ? '...' : '')}
-        description={`Riddle: ${riddle.question} Answer: ${riddle.answer}. ${riddle.explanation}`}
+        title={getRiddleTitle(riddle)}
+        description={getRiddleMetaDescription(riddle)}
         riddle={riddle}
         canonical={`/riddles/${riddle.slug}`}
       />

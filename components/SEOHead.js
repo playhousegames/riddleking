@@ -10,20 +10,22 @@ export default function SEOHead({ title, description, riddle, canonical }) {
   const fullTitle = title ? `${title} | ${siteName}` : `${siteName} — Daily Riddles & Brain Teasers`
   const metaDesc = description || 'Sharpen your mind with handpicked riddles. New daily riddle every day. Classic, wordplay, lateral thinking and more — all free at Riddle King.'
 
+  // Breadcrumb schema for riddle pages. (Replaces the old QAPage schema: QAPage is
+  // meant for user-generated forum answers, the upvote count was invented, and it
+  // let Google show the answer directly in search results.)
   const riddleSchema = riddle ? {
     '@context': 'https://schema.org',
-    '@type': 'QAPage',
-    mainEntity: {
-      '@type': 'Question',
-      name: riddle.question,
-      text: riddle.question,
-      answerCount: 1,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: `${riddle.answer}. ${riddle.explanation}`,
-        upvoteCount: 42,
-      }
-    }
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: `${riddle.category.charAt(0).toUpperCase()}${riddle.category.slice(1)} Riddles`,
+        item: `${siteUrl}/categories/${riddle.category}/`,
+      },
+      { '@type': 'ListItem', position: 3, name: title || riddle.question, item: canonicalUrl },
+    ],
   } : null
 
   const websiteSchema = !riddle ? {

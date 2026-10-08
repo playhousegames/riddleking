@@ -1,3 +1,6 @@
+// Merged duplicate riddles → their canonical page (generated alongside data/riddles.js)
+const riddleRedirects = require('./data/riddle-redirects.json')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
@@ -11,6 +14,9 @@ const nextConfig = {
         destination: 'https://www.riddleking.co.uk/:path*',
         permanent: true,
       },
+
+      // Merged duplicate riddles (Oct 2026 content clean-up)
+      ...riddleRedirects,
 
       // Old WordPress difficulty routes → new category routes
       { source: '/difficulty/easy', destination: '/categories/classic', permanent: true },
