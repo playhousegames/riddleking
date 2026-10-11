@@ -34,8 +34,9 @@ const nextConfig = {
       { source: '/word-ladder-challenge/', destination: '/', permanent: true },
 
       // Old WordPress HTML pages
-      { source: '/tough-riddles.html', destination: '/riddles/', permanent: true },
-      { source: '/easy-riddles.html', destination: '/riddles/', permanent: true },
+      // (must stay ABOVE the generic /:slug.html rule below — first match wins)
+      { source: '/tough-riddles.html', destination: '/hard-riddles/', permanent: true },
+      { source: '/easy-riddles.html', destination: '/easy-riddles/', permanent: true },
       { source: '/funny-riddles.html', destination: '/riddles/', permanent: true },
       { source: '/riddle-categories', destination: '/categories/', permanent: true },
       { source: '/riddle-categories/', destination: '/categories/', permanent: true },

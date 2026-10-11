@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { collections } from '../data/collections'
 
 export default function Footer() {
   return (
@@ -21,6 +22,14 @@ export default function Footer() {
               <li><Link href="/riddles" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>All Riddles</Link></li>
               <li><Link href="/categories" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Categories</Link></li>
               <li><Link href="/submit" style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>Submit a Riddle</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style={{ color: 'var(--gold)', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: '1rem' }}>Collections</h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {collections.map(c => (
+                <li key={c.slug}><Link href={`/${c.slug}`} style={{ fontSize: '0.95rem', color: 'var(--cream-dim)' }}>{c.label}</Link></li>
+              ))}
             </ul>
           </div>
           <div>

@@ -5,17 +5,17 @@ import RiddleCard from '../components/RiddleCard'
 import SEOHead from '../components/SEOHead'
 import Link from 'next/link'
 import { riddles, categories } from '../data/riddles'
+import { collections } from '../data/collections'
 
-export default function Home({ allRiddles, cats }) {
-  const [daily, setDaily] = useState(null)
-  const [recent, setRecent] = useState([])
+export default function Home({ daily: serverDaily, nextDaily, day, recent, total, cats }) {
+  // The daily riddle is rendered on the server (see getStaticProps) so it is in the HTML.
+  // The page is regenerated hourly; this only covers the gap just after midnight UTC
+  // when a cached copy may still show yesterday's riddle.
+  const [daily, setDaily] = useState(serverDaily)
 
   useEffect(() => {
-    const day = Math.floor(Date.now() / 86400000)
-    const todaysRiddle = allRiddles[day % allRiddles.length]
-    const recentRiddles = allRiddles.filter(r => r.id !== todaysRiddle.id).slice(0, 6)
-    setDaily(todaysRiddle)
-    setRecent(recentRiddles)
+    const today = Math.floor(Date.now() / 86400000)
+    if (today === day + 1) setDaily(nextDaily)
   }, [])
 
   const catIcons = {
@@ -50,21 +50,35 @@ export default function Home({ allRiddles, cats }) {
               </p>
             </div>
             <div className="fade-up fade-up--1">
-              {daily ? (
-                <RiddleCard riddle={daily} featured={true} showLink={true} />
-              ) : (
-                <div style={{
-                  background: 'rgba(250,246,238,0.05)',
-                  border: '1px solid rgba(232,184,75,0.3)',
-                  borderRadius: '10px',
-                  padding: '3rem',
-                  textAlign: 'center',
-                  color: 'var(--cream-dim)',
-                  fontStyle: 'italic',
-                }}>
-                  Loading today's riddle...
-                </div>
-              )}
+              <RiddleCard key={daily.id} riddle={daily} featured={true} showLink={true} />
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Collections ─── */}
+        <section className="bg-darker" style={{ padding: '3rem 0' }}>
+          <div className="container">
+            <div className="divider">✦</div>
+            <h2 style={{ textAlign: 'center', marginBottom: '0.4rem' }}>Riddle Collections</h2>
+            <p style={{ textAlign: 'center', color: 'var(--cream-dim)', fontStyle: 'italic', marginBottom: '1.75rem' }}>
+              Hand-picked by the King himself
+            </p>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '1rem',
+            }}>
+              {collections.map(c => (
+                <Link key={c.slug} href={`/${c.slug}`} className="collection-tile">
+                  <div style={{ fontSize: '1.6rem', marginBottom: '0.5rem' }}>{c.icon}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--cream)', marginBottom: '0.25rem' }}>
+                    {c.label}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--gold)', fontFamily: 'var(--font-mono)' }}>
+                    {c.riddles.length} riddles
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -133,7 +147,7 @@ export default function Home({ allRiddles, cats }) {
             </div>
             <div style={{ textAlign: 'center' }}>
               <Link href="/riddles" className="btn btn--outline-gold">
-                View all {allRiddles.length} riddles →
+                View all {total} riddles →
               </Link>
             </div>
           </div>
@@ -176,10 +190,22 @@ export async function getStaticProps() {
     ...c,
     count: riddles.filter(r => r.category === c.slug).length,
   }))
+  // Daily riddle computed at build/regeneration time so the HTML contains it.
+  // Cards never show longform, so strip it to keep the page payload small.
+  const lean = ({ longform, ...r }) => r
+  const day = Math.floor(Date.now() / 86400000)
+  const daily = riddles[day % riddles.length]
+  const nextDaily = riddles[(day + 1) % riddles.length]
+  const recent = riddles.filter(r => r.id !== daily.id).slice(0, 6)
   return {
     props: {
-      allRiddles: JSON.parse(JSON.stringify(riddles)),
+      daily: lean(daily),
+      nextDaily: lean(nextDaily),
+      day,
+      recent: recent.map(lean),
+      total: riddles.length,
       cats,
-    }
+    },
+    revalidate: 3600,
   }
 }
