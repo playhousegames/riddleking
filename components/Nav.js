@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { seasonal } from '../lib/seasonal'
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
@@ -28,6 +29,9 @@ export default function Nav() {
           <li><Link href="/" onClick={close}>Daily Riddle</Link></li>
           <li><Link href="/riddles" onClick={close}>All Riddles</Link></li>
           <li><Link href="/categories" onClick={close}>Categories</Link></li>
+          {seasonal && (
+            <li><Link href={seasonal.href} className="nav__seasonal" onClick={close}>{seasonal.label}</Link></li>
+          )}
           <li><Link href="/about" onClick={close}>About</Link></li>
           <li><Link href="/royal-recommendations" onClick={close}>Royal Picks</Link></li>
           <li><Link href="/riddles/videos" onClick={close}>Videos</Link></li>

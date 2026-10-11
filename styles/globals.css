@@ -121,10 +121,13 @@ button:hover .play-overlay {
   font-size: 1rem;
   color: var(--cream-dim);
   text-decoration: none;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
 .nav__links a:hover { color: var(--gold); }
+
+.nav__links a.nav__seasonal { color: var(--gold); }
 
 .nav__burger {
   display: none;
@@ -368,7 +371,10 @@ button:hover .play-overlay {
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
   body { font-size: 17px; }
+}
 
+/* Burger menu kicks in at 960px: with the seasonal link the full nav needs ~950px */
+@media (max-width: 960px) {
   .nav__burger {
     display: flex;
     flex-direction: column;
