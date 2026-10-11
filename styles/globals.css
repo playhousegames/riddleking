@@ -201,24 +201,6 @@ button:hover .play-overlay {
   background: rgba(232,184,75,0.3);
 }
 
-/* ─── Ad Slots ─── */
-.ad-slot {
-  background: rgba(250,246,238,0.03);
-  border: 1px dashed rgba(250,246,238,0.12);
-  border-radius: 4px;
-  padding: 1rem;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(250,246,238,0.2);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.ad-slot--banner { min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 2rem 0; }
-.ad-slot--rect   { min-height: 250px; display: flex; align-items: center; justify-content: center; }
-.ad-slot--inline { min-height: 100px; display: flex; align-items: center; justify-content: center; margin: 1.5rem 0; }
-
 /* ─── Badges ─── */
 .badge {
   display: inline-block;

@@ -23,17 +23,9 @@ export default function CategoryPage({ cat, catRiddles }) {
             <p style={{ color: 'var(--cream-dim)', fontStyle: 'italic', fontSize: '1.1rem' }}>{cat.description} — {cat.count} riddles</p>
           </div>
         </section>
-        <div className="container"><div className="ad-slot ad-slot--banner">Advertisement · 728×90</div></div>
-        <div className="container--narrow" style={{ padding: '0 1.5rem 5rem' }}>
+        <div className="container--narrow" style={{ padding: '2rem 1.5rem 5rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            {catRiddles.map((r, i) => (
-              <div key={r.id}>
-                <RiddleCard riddle={r} />
-                {(i+1) % 5 === 0 && i < catRiddles.length - 1 && (
-                  <div className="ad-slot ad-slot--inline" style={{ marginTop: '1.25rem' }}>Advertisement · In-feed</div>
-                )}
-              </div>
-            ))}
+            {catRiddles.map(r => <RiddleCard key={r.id} riddle={r} />)}
           </div>
           <div style={{ marginTop: '2rem', textAlign: 'center' }}>
             <Link href="/riddles" className="btn btn--ghost">← Back to all riddles</Link>
