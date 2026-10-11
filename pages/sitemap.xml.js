@@ -1,4 +1,5 @@
 import { riddles, categories } from '../data/riddles'
+import { collections } from '../data/collections'
 
 const SITE_URL = 'https://www.riddleking.co.uk'
 
@@ -8,14 +9,16 @@ function generateSitemap() {
   const riddlePages = riddles.map(r => `/riddles/${r.slug}`)
   const categoryPages = categories.map(c => `/categories/${c.slug}`)
 
-  const allPages = [...staticPages, ...riddlePages, ...categoryPages]
+  const collectionPages = collections.map(c => `/${c.slug}`)
+
+  const allPages = [...staticPages, ...collectionPages, ...riddlePages, ...categoryPages]
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allPages.map(page => `  <url>
     <loc>${SITE_URL}${page}/</loc>
     <changefreq>${page === '' ? 'daily' : 'monthly'}</changefreq>
-    <priority>${page === '' ? '1.0' : page.startsWith('/riddles/') ? '0.8' : '0.6'}</priority>
+    <priority>${page === '' ? '1.0' : collectionPages.includes(page) ? '0.9' : page.startsWith('/riddles/') ? '0.8' : '0.6'}</priority>
   </url>`).join('\n')}
 </urlset>`
 }

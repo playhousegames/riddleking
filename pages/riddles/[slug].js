@@ -4,10 +4,11 @@ import Footer from '../../components/Footer'
 import SEOHead from '../../components/SEOHead'
 import Link from 'next/link'
 import { riddles, categories, getRiddleBySlug, getSameCategoryRiddles, getRiddleMetaDescription, getRiddleTitle } from '../../data/riddles'
+import { getCollectionsForRiddle } from '../../data/collections'
 
 const DIFFICULTY_ARTICLE = { easy: 'an easy', medium: 'a medium', hard: 'a hard' }
 
-export default function RiddlePage({ riddle, sameCategory }) {
+export default function RiddlePage({ riddle, sameCategory, inCollections = [] }) {
   const [revealed, setRevealed] = useState(false)
   if (!riddle) return null
 
@@ -113,6 +114,18 @@ export default function RiddlePage({ riddle, sameCategory }) {
             {contextLine && (
               <p style={{ marginBottom: '1.5rem', fontSize: '0.9rem', color: 'rgba(250,246,238,0.5)', fontStyle: 'italic' }}>
                 {contextLine}
+              </p>
+            )}
+
+            {inCollections.length > 0 && (
+              <p style={{ marginBottom: '1.5rem', fontSize: '0.95rem', color: 'var(--cream-dim)' }}>
+                Featured in:{' '}
+                {inCollections.map((c, i) => (
+                  <span key={c.slug}>
+                    {i > 0 && ' · '}
+                    <Link href={`/${c.slug}`}>{c.label}</Link>
+                  </span>
+                ))}
               </p>
             )}
 
@@ -258,5 +271,6 @@ export async function getStaticProps({ params }) {
   const riddle = getRiddleBySlug(params.slug)
   if (!riddle) return { notFound: true }
   const sameCategory = getSameCategoryRiddles(riddle, 6)
-  return { props: { riddle: JSON.parse(JSON.stringify(riddle)), sameCategory: JSON.parse(JSON.stringify(sameCategory)) } }
+  const inCollections = getCollectionsForRiddle(riddle.slug).map(c => ({ slug: c.slug, label: c.label }))
+  return { props: { riddle: JSON.parse(JSON.stringify(riddle)), sameCategory: JSON.parse(JSON.stringify(sameCategory)), inCollections } }
 }
